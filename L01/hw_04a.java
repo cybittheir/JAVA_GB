@@ -44,17 +44,21 @@ public class hw_04a {
 ////////////////////
         String num_str1 = String.join("",arr1);
         String num_str2 = String.join("",arr2);
-//        String num_str1 = "3???08";
-//        String num_str2 = "4?17??";
+//        String num_str1 = "?2?3";
+//        String num_str2 = "??70";
         arr1 = num_str1.split("", 0);
         arr2 = num_str2.split("", 0);
 
 ////////////////////////
         int summa = summ[0];
-//        int summa = 850263;
+//        int summa = 5;
         System.out.printf(">> %s + %s = %d", num_str1, num_str2, summa);
         String [] res = Integer.toString(summa).split("",0);
         boolean fail = false;
+
+        if (res.length < min_len(arr1) || res.length < min_len(arr2)) {
+            fail = true;
+        }
 
         int diff_res1 = res.length - arr1.length;
 
@@ -98,6 +102,9 @@ public class hw_04a {
         int [] test = new int[4];
         int [] next_test = new int[4];
 
+        String first = "";
+        String second = "";
+
         for (int i = res.length-1; i > -1; i--){
 
             test = check(arr1[i], arr2[i], res[i], one);
@@ -128,7 +135,17 @@ public class hw_04a {
 
             System.out.println(get_res[0]);
 
+            if (test[0] >= 0) {
+                first = test[0] + first;
+                second = test[1] + second;
+            } else {
+                first = "";
+                second = "";
+            }
         }
+
+        if (first.trim() != "") {System.out.printf("(%s + %s) = %d", first, second,Integer.valueOf(first) + Integer.valueOf(second));}
+
     }
 
     static String[] ChooseRes(int num, int[] test){
@@ -253,5 +270,20 @@ public class hw_04a {
             }
 
             return result;
+ 
+       }
+
+    static int min_len(String[] arr) {
+        int result = arr.length;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].charAt(0) == '?') {
+                result -= 1;
+            } else {
+                break;
+            }
         }
+
+        return result;
+    }
 }
