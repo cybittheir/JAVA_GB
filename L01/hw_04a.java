@@ -8,7 +8,6 @@ package L01;
  */
 
 import java.util.Random;
-
 public class hw_04a {
 
     public static void main(String[] args) {
@@ -40,8 +39,6 @@ public class hw_04a {
         }
 
         int max = (int) Math.pow(10,max_exp);
-
-//        System.out.printf("min: %d, max: %d\n", min , max);
 
         int[]summ = randoms (1,min,max);
 ////////////////////
@@ -161,8 +158,6 @@ public class hw_04a {
         int[] result=new int [4];
         int ten = 0;
         
-//        System.out.println("\n" + val1.trim() + "/" + val2.trim()  + "/" + res + "/" + one);
-
         if (val1.trim().charAt(0) != '?' && val2.trim().charAt(0) != '?'){
             int dig1 = Integer.valueOf(val1);
             int dig2 = Integer.valueOf(val2);
@@ -260,4 +255,3 @@ public class hw_04a {
             return result;
         }
 }
-
