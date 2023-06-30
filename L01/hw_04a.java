@@ -144,7 +144,9 @@ public class hw_04a {
             }
         }
 
-        if (first.trim() != "") {System.out.printf("(%s + %s) = %d", first, second,Integer.valueOf(first) + Integer.valueOf(second));}
+        if (first.trim() != "") {
+            System.out.printf("(%s + %s) = %d", first, second,Integer.valueOf(first) + Integer.valueOf(second));
+        }
 
     }
 
