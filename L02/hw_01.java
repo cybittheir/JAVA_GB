@@ -70,6 +70,8 @@ public class hw_01 {
             
         }
 
+        closeLogger();
+
     }           
 
     static void writeToFile(String full_path, String text){
@@ -84,6 +86,8 @@ public class hw_01 {
         } catch (Exception e) {
             // TODO: handle exception
             i_logger.warning("Unable to open " + full_path + " for record");
+            closeLogger();
+            System.exit(0);
         }
 
     }
@@ -140,6 +144,7 @@ public class hw_01 {
         } catch (Exception e) {
             System.out.println("File not opened");
             i_logger.warning("Error: " + file_path +  " File could not be opened.");
+            closeLogger();
             System.exit(0);
         }
 
