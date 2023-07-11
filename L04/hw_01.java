@@ -12,6 +12,7 @@ public class hw_01 {
     public static void main(String[] args) {
     
         LinkedList<String> list = new LinkedList<>();
+        LinkedList<String> newList = new LinkedList<>();
         list.add("001");
         list.add("002");
         list.add("004");
@@ -21,7 +22,9 @@ public class hw_01 {
 
         System.out.println(list);
 
-        list = reverseList(list);
+        System.out.println(reverseNew(list));
+        System.out.println(list);
+        System.out.println(reverseList(list));
         System.out.println(list);
 
     }    
@@ -30,6 +33,18 @@ public class hw_01 {
         LinkedList<String> result = new LinkedList<>();
         while (!list.isEmpty()){
             result.add(list.pollLast());
+        }
+        return result;
+    }
+
+    static LinkedList<String> reverseNew(LinkedList<String> list){
+        LinkedList<String> result = new LinkedList<>();
+        Iterator diterator = list.descendingIterator();
+        while (diterator.hasNext()){
+            Object object = diterator.next();
+            if (object instanceof String){
+                result.add(object.toString());
+            }
         }
         return result;
     }
