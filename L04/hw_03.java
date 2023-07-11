@@ -18,7 +18,8 @@ public class hw_03 {
         list.add(27);
         list.add(75);
 
-        System.out.printf("%s == %d",list, summ(list));
+        System.out.printf("%s == %d\n",list, summ(list));
+        System.out.printf("%s\n",list);
 
     }
 

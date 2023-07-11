@@ -26,6 +26,7 @@ public class hw_02 {
 
         System.out.println(dequeue(list));
         System.out.println(first(list));
+        System.out.println(list);
 
     }
 
