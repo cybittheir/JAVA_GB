@@ -1,0 +1,9 @@
+ASUS;notebook;tw-15c1;15;i5;8;SSD;256;Win10Pro
+ASUS;ultrabook;ux-13a1;13;i7;8;SSD;512;Win11Home
+Acer;ultrabook;ai137x;15;i7;8;SSD;256;NoOS
+Toshiba;notebook;tr1401;14;i3;8;SSD;256;Win11Pro
+Sony;ultrabook;wu135ixru;13;i5;16;SSD;512;Win11Home
+Sony;notebook;wn15uru;15;i3;8;SSD;256;Win10Pro
+iRus;netbook;ntb-1501;15;i3;8;HDD;128;NoOS
+iRus;notebook;nb-14uq;14;Pentium;4;SSD;256;Linux
+DEXP;netbook;nn-11e;11;Cel;4;SSD;256;Linux
