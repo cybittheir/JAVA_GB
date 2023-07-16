@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class hw_01 {
      
         String file_path = path.trim() + file_name.trim();
    
-        String[] paramMenu = new String[9];
+        String[] paramMenu = new String[10];
 
         paramMenu[0] = "закончить выбор";
         paramMenu[1] = "тип устройства";
@@ -64,59 +65,126 @@ public class hw_01 {
         paramMenu[5] = "объем оперативной памяти";
         paramMenu[6] = "объем жесткого диска";
         paramMenu[7] = "тип жесткого диска";
-        paramMenu[8] = "операционная система";
+        paramMenu[8] = "OS";
+        paramMenu[9] = "стоимость";
 
-        Set<Laptop> set = new HashSet<>();
+        Set<Laptop> setNB = new HashSet<>();
 
         createLogger();
 
         ArrayList<String> inList = readFile(file_path);
 
         closeLogger();
-        
+
         ArrayList<String> typesList = new ArrayList<>();
-        ArrayList<String> brendList = new ArrayList<>();
+        ArrayList<String> brandList = new ArrayList<>();
         ArrayList<String> screenList = new ArrayList<>();
         ArrayList<String> cpuList = new ArrayList<>();
         ArrayList<String> memoryList = new ArrayList<>();
         ArrayList<String> hddSizeList = new ArrayList<>();
         ArrayList<String> diskTypeList = new ArrayList<>();
         ArrayList<String> osList = new ArrayList<>();
+        ArrayList<String> costList = new ArrayList<>();
 
         for (String str: inList){
             String[] field = str.trim().split(";",0); 
-            Laptop entry = new Laptop(field[0], field[1], field[2], field[3], field[4], field[5], field[6], field[7], field[8]);
+            Laptop nb = new Laptop(field[0], field[1], field[2], field[3], field[4], field[5], field[6], field[7], field[8], field[9]);
+            setNB.add(nb);
 
             if (!typesList.contains(field[1])){typesList.add(field[1]);}
-            if (!brendList.contains(field[0])){brendList.add(field[0]);}
+            if (!brandList.contains(field[0])){brandList.add(field[0]);}
             if (!screenList.contains(field[3])){screenList.add(field[3]);}
             if (!cpuList.contains(field[4])){cpuList.add(field[4]);}
             if (!memoryList.contains(field[5])){memoryList.add(field[5]);}
             if (!hddSizeList.contains(field[7])){hddSizeList.add(field[7]);}
             if (!diskTypeList.contains(field[6])){diskTypeList.add(field[6]);}
             if (!osList.contains(field[8])){osList.add(field[8]);}
+            if (!costList.contains(field[9])){costList.add(field[9]);}
     
-            set.add(entry);
         }
 
         Map<String,List<String>> dict = new TreeMap<>();
         dict.put(paramMenu[1], typesList);
-        dict.put(paramMenu[2], brendList);
+        dict.put(paramMenu[2], brandList);
         dict.put(paramMenu[3], screenList);
         dict.put(paramMenu[4], cpuList);
         dict.put(paramMenu[5], memoryList);
         dict.put(paramMenu[6], hddSizeList);
         dict.put(paramMenu[7], diskTypeList);
         dict.put(paramMenu[8], osList);
+        dict.put(paramMenu[9], costList);
 
-        System.out.println(getParam(dict,paramMenu));
+        Map<String, String> selectNB = new TreeMap<>();
+        selectNB = getParam(dict,paramMenu);
         in.close();
 
-/*
-        for (Laptop entry: set){
-            System.out.println(entry);
+
+        List<Laptop> res = new ArrayList<>();
+        boolean addRec = false;
+
+        for (Laptop nb: setNB){
+            boolean recMatch = true;
+
+            if (selectNB.isEmpty()){
+                    recMatch=true;
+                    addRec = true;
+            } else {
+                if (selectNB.get(paramMenu[9]) != null && nb.costNB() >= Integer.valueOf(selectNB.get(paramMenu[9]))) {
+                    addRec = true;
+                } else if(selectNB.get(paramMenu[9]) != null) {
+                    recMatch=false;
+                }
+                if (selectNB.get(paramMenu[2]) != null && nb.paramBrand().equals(selectNB.get(paramMenu[2]))) {
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[2]) != null){
+                    recMatch=false;
+                }
+
+                if (nb.paramCPU().equals(selectNB.get(paramMenu[4]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[4]) != null){
+                    recMatch=false;
+                }
+                if (nb.paramMem().equals(selectNB.get(paramMenu[5]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[5]) != null){
+                    recMatch=false;
+                }
+                if (nb.paramScreen().equals(selectNB.get(paramMenu[3]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[3]) != null){
+                    recMatch=false;
+                }
+                if (nb.paramDiskSize().equals(selectNB.get(paramMenu[6]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[6]) != null){
+                    recMatch=false;
+                }
+                if (nb.paramDiskType().equals(selectNB.get(paramMenu[7]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[7]) != null){
+                    recMatch=false;
+                }
+                if (nb.paramOS().equals(selectNB.get(paramMenu[8]))){
+                    addRec = true;
+                } else if (selectNB.get(paramMenu[8]) != null){
+                    recMatch=false;
+                }
+            }
+
+            if (addRec && recMatch){
+                res.add(nb);
+                addRec = false;
+            }
         }
-*/
+
+        if (res.isEmpty()) {
+            System.out.println("Нет ни одного ноутбука с выбранными параметрами. Измените запрос");
+        } else {
+            for(int i = 0; i < res.size(); i++){
+                System.out.println(res.get(i).toString().trim());
+            }
+        }
 
     }
 
